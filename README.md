@@ -1,4 +1,4 @@
-# prectical_exam
+# Stripe Payment Getway
 
 A new Flutter project.
 
