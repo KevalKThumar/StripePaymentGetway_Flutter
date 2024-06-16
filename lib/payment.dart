@@ -9,6 +9,7 @@ Future createPaymentIntent({required String name,
   required String pin,
   required String city,
   required String state,
+  required String description,
   required String country,
   required String currency,
   required String amount}) async{
@@ -19,7 +20,7 @@ Future createPaymentIntent({required String name,
     'amount': amount,
     'currency': currency.toLowerCase(),
     'automatic_payment_methods[enabled]': 'true',
-    'description': "Test Donation",
+    'description': description,
     'shipping[name]': name,
     'shipping[address][line1]': address,
     'shipping[address][postal_code]': pin,
@@ -36,14 +37,11 @@ Future createPaymentIntent({required String name,
     body: body
   );
 
-  print(body);
-
   if(response.statusCode==200){
     var json=jsonDecode(response.body);
-    print(json);
     return json;
   }
   else{
-    print("error in calling payment intent");
+    throw Exception('Failed to create payment intent');
   }
 }

@@ -53,10 +53,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          color: Colors.blue,
-        ),
+        
         buttonTheme: const ButtonThemeData(),
         textTheme: const TextTheme(),
       ),

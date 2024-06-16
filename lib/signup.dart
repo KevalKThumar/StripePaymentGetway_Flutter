@@ -50,114 +50,118 @@ class _SignUpScreenState extends State<SignUpScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Form(
           key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Sign Up.',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Sign Up.',
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 30),
-              AuthField(
-                hintText: 'Name',
-                controller: nameController,
-                focusNode: nameFocusNode,
-                nextFocus: emailFocusNode,
-                prefixIcon: const Icon(
-                  Icons.person,
-                  color: Colors.black,
+                const SizedBox(height: 30),
+                AuthField(
+                  hintText: 'Name',
+                  controller: nameController,
+                  focusNode: nameFocusNode,
+                  nextFocus: emailFocusNode,
+                  prefixIcon: const Icon(
+                    Icons.person,
+                    color: Colors.black,
+                  ),
+                  textInputType: TextInputType.name,
                 ),
-                textInputType: TextInputType.name,
-              ),
-              const SizedBox(height: 15),
-              AuthField(
-                hintText: 'Email',
-                controller: emailController,
-                focusNode: emailFocusNode,
-                nextFocus: passwordFocusNode,
-                prefixIcon: const Icon(
-                  Icons.email,
-                  color: Colors.black,
+                const SizedBox(height: 15),
+                AuthField(
+                  hintText: 'Email',
+                  controller: emailController,
+                  focusNode: emailFocusNode,
+                  nextFocus: passwordFocusNode,
+                  prefixIcon: const Icon(
+                    Icons.email,
+                    color: Colors.black,
+                  ),
+                  textInputType: TextInputType.emailAddress,
                 ),
-                textInputType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 15),
-              AuthField(
-                hintText: 'Password',
-                controller: passwordController,
-                isObscureText: true,
-                focusNode: passwordFocusNode,
-                prefixIcon: const Icon(
-                  Icons.lock,
-                  color: Colors.black,
+                const SizedBox(height: 15),
+                AuthField(
+                  hintText: 'Password',
+                  controller: passwordController,
+                  isObscureText: true,
+                  focusNode: passwordFocusNode,
+                  prefixIcon: const Icon(
+                    Icons.lock,
+                    color: Colors.black,
+                  ),
+                  textInputType: TextInputType.visiblePassword,
                 ),
-                textInputType: TextInputType.visiblePassword,
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 40,
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: Colors.black,
+                      foregroundColor: Colors.white,
                     ),
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.white,
-                  ),
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      context.read<FirebaseAuthMethods>().signUpWithEmail(
-                            email: emailController.text,
-                            password: passwordController.text,
-                            context: context,
-                          );
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              // Already have an account
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Already have an account?',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(width: 4),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                      );
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        context.read<FirebaseAuthMethods>().signUpWithEmail(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              context: context,
+                            );
+                      }
                     },
-                    child: Text(
-                      'Sign In',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
                   ),
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(height: 20),
+
+                // Already have an account
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already have an account?',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Sign In',
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       )),

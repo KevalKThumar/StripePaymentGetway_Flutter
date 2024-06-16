@@ -20,6 +20,7 @@ class _PayState extends State<Pay> {
   TextEditingController stateController = TextEditingController();
   TextEditingController countryController = TextEditingController();
   TextEditingController pincodeController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   final formkey = GlobalKey<FormState>();
   final formkey1 = GlobalKey<FormState>();
@@ -28,6 +29,7 @@ class _PayState extends State<Pay> {
   final formkey4 = GlobalKey<FormState>();
   final formkey5 = GlobalKey<FormState>();
   final formkey6 = GlobalKey<FormState>();
+  final formkey7 = GlobalKey<FormState>();
 
   List<String> currencyList = <String>[
     'INR',
@@ -54,6 +56,7 @@ class _PayState extends State<Pay> {
         city: cityController.text,
         state: stateController.text,
         country: countryController.text,
+        description: descriptionController.text,
       );
 
       // 2. initialize the payment sheet
@@ -103,8 +106,10 @@ class _PayState extends State<Pay> {
               hasDonated
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
+                      child: Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "Your ${amountController.text} $selectedCurrency is successfully transferred.",
@@ -119,7 +124,7 @@ class _PayState extends State<Pay> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blueAccent.shade400),
+                                    backgroundColor: Colors.black),
                               child: const Text(
                                 "Pay again",
                                 style: TextStyle(
@@ -136,6 +141,7 @@ class _PayState extends State<Pay> {
                             ),
                           ),
                         ],
+                      ),
                       ),
                     )
                   : Padding(
@@ -197,8 +203,17 @@ class _PayState extends State<Pay> {
                             ReusableTextField(
                               formkey: formkey1,
                               title: "Name",
-                              hint: "Ex. John Doe",
+                              hint: "Ex. Keval Thumar",
                               controller: nameController,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            ReusableTextField(
+                              formkey: formkey7,
+                              title: "description",
+                              hint: "Ex. To buy clothes",
+                              controller: descriptionController,
                             ),
                             const SizedBox(
                               height: 10,
@@ -206,7 +221,7 @@ class _PayState extends State<Pay> {
                             ReusableTextField(
                               formkey: formkey2,
                               title: "Address Line",
-                              hint: "Ex. 123 Main St",
+                              hint: "Ex. 123 Main Street",
                               controller: addressController,
                             ),
                             const SizedBox(
@@ -219,7 +234,7 @@ class _PayState extends State<Pay> {
                                     child: ReusableTextField(
                                       formkey: formkey3,
                                       title: "City",
-                                      hint: "Ex. New Delhi",
+                                      hint: "Ex. Ahemadabad",
                                       controller: cityController,
                                     )),
                                 const SizedBox(
@@ -230,7 +245,7 @@ class _PayState extends State<Pay> {
                                     child: ReusableTextField(
                                       formkey: formkey4,
                                       title: "State (Short code)",
-                                      hint: "Ex. DL for Delhi",
+                                      hint: "Ex.GJ for Gujarat",
                                       controller: stateController,
                                     )),
                               ],
@@ -309,7 +324,6 @@ class _PayState extends State<Pay> {
                                       countryController.clear();
                                       pincodeController.clear();
                                     } catch (e) {
-                                      print("payment sheet failed");
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
                                         content: Text(
@@ -318,6 +332,9 @@ class _PayState extends State<Pay> {
                                         ),
                                         backgroundColor: Colors.redAccent,
                                       ));
+                                      setState(() {
+                                        hasDonated = false;
+                                      });
                                     }
                                   }
                                 },

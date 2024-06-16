@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:prectical_exam/auth_provider.dart';
 import 'package:prectical_exam/file_provider.dart';
 import 'package:prectical_exam/pay.dart';
 import 'package:prectical_exam/signup.dart';
@@ -51,10 +52,19 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(
             onPressed: () {
-              context.read<ImageProviders>().onShareXFileFromNetwork(context);
+              context.read<FirebaseAuthMethods>().signOut(context);
             },
             icon: const Icon(
               Icons.logout,
+              color: Colors.white,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              context.read<ImageProviders>().onShareXFileFromNetwork(context);
+            },
+            icon: const Icon(
+              Icons.share,
               color: Colors.white,
             ),
           ),
