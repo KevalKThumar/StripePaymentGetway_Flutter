@@ -107,41 +107,41 @@ class _PayState extends State<Pay> {
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Your ${amountController.text} $selectedCurrency is successfully transferred.",
-                            style: const TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          SizedBox(
-                            height: 50,
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.black),
-                              child: const Text(
-                                "Pay again",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    // fontWeight: FontWeight.bold,
-                                    fontSize: 16),
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  hasDonated = false;
-                                  amountController.clear();
-                                });
-                              },
+                          children: [
+                            Text(
+                              "Your ${amountController.text} $selectedCurrency is successfully transferred.",
+                              style: const TextStyle(
+                                  fontSize: 28, fontWeight: FontWeight.bold),
                             ),
-                          ),
-                        ],
-                      ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            SizedBox(
+                              height: 50,
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black),
+                                child: const Text(
+                                  "Pay again",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      // fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    hasDonated = false;
+                                    amountController.clear();
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   : Padding(
@@ -298,7 +298,8 @@ class _PayState extends State<Pay> {
                                       formkey3.currentState!.validate() &&
                                       formkey4.currentState!.validate() &&
                                       formkey5.currentState!.validate() &&
-                                      formkey6.currentState!.validate()) {
+                                      formkey6.currentState!.validate() &&
+                                      formkey7.currentState!.validate()) {
                                     await initPaymentSheet();
 
                                     try {
